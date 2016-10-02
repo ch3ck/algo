@@ -5,7 +5,7 @@ Feel free to check out the [license](LICENSE), and make contributions by pull re
 
 ## Contributing
 
-Star and Fork this repo; then follow the instructions in [Contributing.md](CONTRIBUTING)
+Star and Fork this repo; then follow the instructions in [Contributing.md](CONTRIBUTING.md)
 
 ## Talking to other Devs and Contributors
 
