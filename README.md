@@ -4,7 +4,8 @@ AlGo was created by, and is maintained by [Nyah Check](https://github.com/Ch3ck)
 Feel free to check out the [license](LICENSE), and make contributions by pull requests.
 
 ## Contributing
-Please follow the instructions in [Contributing.md](CONTRIBUTING)
+
+Star and Fork this repo; then follow the instructions in [Contributing.md](CONTRIBUTING)
 
 ## Talking to other Devs and Contributors
 
