@@ -3,7 +3,9 @@ package main
 import "fmt"
 
 //Heapsort for integers in Golang
-//based on Professor's Mark Allen Weiss solution in c
+//based on Professor Mark Allen Weiss' solution in C
+//http://users.cs.fiu.edu/~weiss/
+
 
 func Swap(lhs *int, rhs *int){
     tmp:=*lhs
