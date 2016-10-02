@@ -18,8 +18,8 @@ you read through before you start participating.
 We have different Data structures and algorithms in mind which we created in the
 issues.
 
-Create a package for each new Data structure and algorithm with it's unit test
-integrated in the test directory. This test should easily be called and tested
+Create a new 'package' for each new Data structure or Algorithm with it's unit test
+integrated in the /test directory. This test should easily be called and tested
 from the main package
 
 
@@ -73,14 +73,13 @@ from the Git history.
 Please see the [Coding Style](#coding-style) for further guidelines.
 
 
-### Sign your work
+## Sign your work
 
 The sign-off is a simple line at the end of the explanation for the patch. Your
 signature certifies that you wrote the patch or otherwise have the right to pass
 it on as an open-source patch. The rules are pretty simple: if you can certify
 the below (from [developercertificate.org](http://developercertificate.org/)):
 
-```
 
 
 ## Communication guidelines
@@ -129,6 +128,7 @@ The rules:
 3. Document _all_ declarations and methods, even private ones. Declare
    expectations, caveats and anything else that may be important. If a type
    gets exported, having the comments already there will ensure it's ready.
+
 
 ## Questions
 
