@@ -1,4 +1,4 @@
-package AlGo
+package queue
 
 import "testing"
 
