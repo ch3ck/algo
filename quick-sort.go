@@ -2,12 +2,12 @@ package main
 
 import "fmt"
 
-//Heapsort for integers in Golang
+//Quicksort for integers in Golang
 //based on Professor Mark Allen Weiss' solution in C
 //http://users.cs.fiu.edu/~weiss/
 
 
-func Swap(lhs *int, rhs *int){
+/*func Swap(lhs *int, rhs *int){
     tmp:=*lhs
     *lhs=*rhs
     *rhs=tmp
@@ -46,7 +46,49 @@ func Heapsort(A []int, N int){
         Swap(&A[0], &A[i]) //DeleteMax
         PercDown(A,0,i)
     }
+}*/
+
+/* START: fig7_14.txt */
+
+//#define Cutoff ( 3 )
+
+func Qsort(int A[ ], int Left, int Right)
+{
+    int i, j;
+    ElementType Pivot;
+    
+    if Left + Cutoff <= Right {
+        Pivot = Median3(A, Left, Right);
+        i = Left;
+        j = Right - 1;
+
+        for ;; {
+            while A[ ++i ] < Pivot { 
+
+            }
+            while( A[ --j ] > Pivot ){
+
+            }
+
+            if i < j{
+                Swap(&A[i], &A[j])
+            }
+            else
+                break;
+        }
+        Swap(&A[i], &A[Right-1]);  /* Restore pivot */
+        
+        Qsort(A, Left, i-1)
+        Qsort(A, i+1, Right);
+    }
+    else  /* Do an insertion sort on the subarray */
+    InsertionSort(A+Left, Right - Left+1);
 }
+
+func Quicksort(A []int, N int){
+    Qsort(A, 0, N-1)
+}
+
 
 func main(){
     array := []int{3,1,4,1,5,9,2,6}
