@@ -1,5 +1,7 @@
 package main
 
+import "os"
+import "strconv"
 import "fmt"
 
 //Heapsort for integers in Golang
@@ -48,10 +50,34 @@ func Heapsort(A []int, N int) {
 }
 
 func main() {
-	array := []int{3, 1, 4, 1, 5, 9, 2, 6}
-	fmt.Printf("before: %v\n", array)
-	Heapsort(array, len(array)) //pass heap and length count
-	fmt.Printf("after: %v", array)
+	//user should pass array of numbers without brackets or commas
+	arg := os.Args[1:]
+
+	//check for amount of arguments
+	if len(arg) < 1 {
+		fmt.Printf("usage issues, not enough arguments\n")
+		return
+	} else {
+		//initialize array
+		var array = make([]int, len(arg))
+
+		//perform data validation:
+		//traverse argument array and check for int type
+		for i := 0; i < len(arg); i++ {
+			if s, err := strconv.Atoi(arg[i]); err != nil {
+				fmt.Printf("usage: ./heapsort int int\n")
+				return
+			} else {
+				array[i] = s
+			}
+		}
+		//data is valid and array contains integers passed by user
+		//run the sorting algorithm:
+		fmt.Printf("heapsorting: %v\n", array)
+		Heapsort(array, len(array))
+		//display values
+		fmt.Printf("result: %v", array)
+	}
 
 	/* Test for Swap func
 	   j, k := 10, 5
