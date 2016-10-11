@@ -1,14 +1,34 @@
 package insertsort
 
 import (
-	"fmt"
+	"reflect"
 	"testing"
 )
 
-func TestInsertSort(t *testing.T) {
+/* Test pair for InsertSort() algorithm */
+type testpair struct {
+	unsorted_slice []int
+	sorted_slice []int
+}
 
-	array := []int{1, 6, 2, 4, 9, 0, 5, 3, 7, 8}
-	fmt.Println("not sorted array: ", array)
-	insertSort(array)
-	fmt.Println("just sorted array: ", array)
+/* Test instance of testpair the unsorted and sorted slices */
+var tests = []testpair{
+	{[]int{3, 2, 1, 5, 6, 3, 7, 8, 9}, []int{1, 2, 3, 3, 5, 6, 7, 8, 9}},
+	{[]int{1, 4, 2, 3}, []int{1, 2, 3, 4}},
+	{[]int{4, 5, 2, 7, 6, 8, 7}, []int{2, 4, 5, 6, 7, 7, 8}},
+}
+
+/* Test case to test the InsertSort function */
+func TestInsertSort(t *testing.T) {
+	for _, pair := range tests {
+		sorted := InsertSort(pair.unsorted_slice)
+
+		if !reflect.DeepEqual(sorted, pair.sorted_slice) {
+			t.Error(
+				"For", pair.unsorted_slice,
+				"expected", pair.sorted_slice,
+				"got", sorted,
+			)
+		}
+	}
 }
