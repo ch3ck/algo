@@ -89,14 +89,12 @@ func TestLinkedListMethods(t *testing.T){
     e9 := l.PushFront(9)
 
     fmt.Println("\nPushBack(-1) and PushFront(9):")
-    //print out elements
     printHeadToTail(l)
 
     l.MoveToFront(eMinus1)
     l.MoveToBack(e9)
 
     fmt.Println("\nMoveToFront(-1) and MoveToBack(9):")
-    //print out elements
     printHeadToTail(l)
 
     fmt.Println("\nRemove(Front()):")
@@ -112,15 +110,5 @@ func TestLinkedListMethods(t *testing.T){
 
     fmt.Println("\nMoveAfter(Front(), Back())")
     l.MoveAfter(e, f)
-    printHeadToTail(l)
-
-
-    //test each method on the linked list package.
-    /*
-    list.MoveBefore() //moves element e to its new position before mark
-                      //if e or mark is not an element of l or e == mark, the list is not modified
-
-    list.MoveAfter() //moves element e to its new position after mark
-                     //if e or mark is not an element of l, or e == mark, the list is not modified
-    */
+    printHeadToTail(l)    
 }
