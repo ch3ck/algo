@@ -1,4 +1,4 @@
-# AlGo
+# AlGo [![Go Report Card](https://goreportcard.com/badge/github.com/Ch3ck/Algo)](https://goreportcard.com/report/github.com/Ch3ck/Algo) | 
 AlGo was created by, and is maintained by [Nyah Check](https://github.com/Ch3ck), and it's the Golang implementation of the Data Structures and Algorithms as referred in CLRS. 
 
 Feel free to check out the [license](LICENSE), and make contributions by pull requests.
