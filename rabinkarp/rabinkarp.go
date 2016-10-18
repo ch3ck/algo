@@ -19,7 +19,7 @@ func Search(txt string, patterns []string) []string {
 	return matches
 }
 
-// Indices returns the Indices of the first occurence of each pattern in txt.
+// Indices returns the Indices of the first occurrence of each pattern in txt.
 func Indices(txt string, patterns []string) map[int]int {
 	n, m := len(txt), MinLen(patterns)
 	matches := make(map[int]int)
