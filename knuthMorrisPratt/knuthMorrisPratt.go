@@ -1,8 +1,8 @@
-// Package knuthMorrisPratt provides a simple Match function to find occurences
+// Package knuthMorrisPratt provides a simple Match function to find occurrences
 // of a pattern in a block of text
 package knuthMorrisPratt
 
-// Match uses the Knuth-Morris-Pratt algorithm to find occurences of `pattern` in `text`
+// Match uses the Knuth-Morris-Pratt algorithm to find occurrences of `pattern` in `text`
 // and returns the list of indexes where the matches are in `text`
 func Match(text, pattern string) (result []int) {
 	n := len(text)

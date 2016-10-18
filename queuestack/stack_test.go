@@ -31,7 +31,7 @@ func TestStackIsEmptyAfterPushAndPop(t *testing.T) {
 	}
 
 	if err != nil {
-		t.Error("there should not have been anything erroneous occuring after pushing and popping an element:", err)
+		t.Error("there should not have been anything erroneous occurring after pushing and popping an element:", err)
 	}
 
 	if v != 1 {
@@ -68,7 +68,7 @@ func TestPeekReturnsTopOfStack(t *testing.T) {
 	v, err := s.Peek()
 
 	if err != nil {
-		t.Error("there should have been nothing erroneous that occured:", err)
+		t.Error("there should have been nothing erroneous that occurred:", err)
 	}
 
 	if v != 2 {

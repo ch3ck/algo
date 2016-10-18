@@ -31,7 +31,7 @@ func TestQueueIsEmptyAfterEnqueueAndDequeue(t *testing.T) {
 	}
 
 	if err != nil {
-		t.Error("there should not have been anything erroneous occuring after enqueueing and dequeueing an element!")
+		t.Error("there should not have been anything erroneous occurring after enqueueing and dequeueing an element!")
 	}
 
 	if v != 1 {
@@ -68,7 +68,7 @@ func TestPeekReturnsHeadOfQueue(t *testing.T) {
 	v, err := q.Peek()
 
 	if err != nil {
-		t.Error("there should have been nothing erroneous that occured.")
+		t.Error("there should have been nothing erroneous that occurred.")
 	}
 
 	if v != 1 {
