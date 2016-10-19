@@ -54,6 +54,7 @@ func Indices(txt string, patterns []string) map[int]int {
 	return matches
 }
 
+// Hash converts a string into a uint32 hash.
 func Hash(s string) uint32 {
 	var h uint32
 	for i := 0; i < len(s); i++ {
@@ -62,6 +63,8 @@ func Hash(s string) uint32 {
 	return h
 }
 
+// HashPatterns takes a slice of patterns and creates a map of
+// patterns to their hashed value.
 func HashPatterns(patterns []string, l int) map[uint32][]int {
 	m := make(map[uint32][]int)
 	for i, t := range patterns {
@@ -76,6 +79,7 @@ func HashPatterns(patterns []string, l int) map[uint32][]int {
 	return m
 }
 
+// MinLen returns the patterns of the smallest length.
 func MinLen(patterns []string) int {
 	if len(patterns) == 0 {
 		return 0

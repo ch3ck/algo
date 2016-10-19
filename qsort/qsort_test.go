@@ -10,8 +10,8 @@ import (
 
 /* Test pair for Qsort() algorithm */
 type testpair struct {
-	unsorted_slice []int
-	sorted_slice   []int
+	unsortedSlice []int
+	sortedSlice   []int
 }
 
 /* Test instance of testpair the unsorted and sorted slices */
@@ -27,8 +27,8 @@ func TestQsort(t *testing.T) {
 
 		if !reflect.DeepEqual(sorted, pair.sorted_slice) {
 			t.Error(
-				"For", pair.unsorted_slice,
-				"expected", pair.sorted_slice,
+				"For", pair.unsortedSlice,
+				"expected", pair.sortedSlice,
 				"got", sorted,
 			)
 		}
