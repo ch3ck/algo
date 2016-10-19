@@ -24,7 +24,7 @@ func New() *Stack {
 	return new(Stack).Init()
 }
 
-// Length returns the number of elements of the stack s
+// Len (Length) returns the number of elements of the stack s.
 // The complexity is O(1)
 func (s *Stack) Len() int {
 	return s.length

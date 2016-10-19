@@ -5,10 +5,13 @@ package convexHull
 
 import "sort"
 
+// Point is a struct that holds the X Y cooridinates
+// of a specific point in the Ecliden plane or space.
 type Point struct {
 	X, Y int
 }
 
+// Points is a slice built up of Point structs.
 type Points []Point
 
 func (points Points) Swap(i, j int) {

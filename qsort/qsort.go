@@ -1,15 +1,13 @@
-/* Quick Sort Algorithm Data structure implemented */
-/* This Algorithm takes an slice of integers and   */
+/*Package qsort -- Quick Sort Algorithm Data structure implementation: */
+/* This Algorithm takes an slice of integers and */
 /* sort using the qsort() algorithm below */
 /* Author: Alangi Derick (@d3r1ck)*/
-
-/* Create the package */
 package qsort
 
 import "math/rand"
 
-/* As GoLang standard, the function in a package should */
-/* start with Upper case letter like; Qsort() */
+/*Qsort (As GoLang standard, the function in a package should */
+/* start with Upper case letter) */
 func Qsort(slice []int) []int {
 
 	/* Check if the slice has just a single cell */
