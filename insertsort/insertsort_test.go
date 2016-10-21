@@ -8,7 +8,7 @@ import (
 /* Test pair for InsertSort() algorithm */
 type testpair struct {
 	unsortedSlice []int
-	sortedSlice []int
+	sortedSlice   []int
 }
 
 /* Test instance of testpair the unsorted and sorted slices */

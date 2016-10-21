@@ -1,4 +1,3 @@
-
 package rabinkarp
 
 const base = 2048
