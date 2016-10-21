@@ -1,4 +1,3 @@
-
 package rabinkarp
 
 import (
@@ -22,11 +21,12 @@ func TestSearch(t *testing.T) {
 	for _, ct := range SearchTests {
 		found := Search(ct.txt, ct.patterns)
 		if !eq(found, ct.expected) {
-			t.Errorf("Broken test .....",
+			t.Error("Broken test .....",
 				ct.txt, ct.patterns, found, ct.expected)
 		}
 	}
 }
+
 // sort string for comparison
 func eq(f, s []string) bool {
 	fx := make([]string, len(f))
@@ -38,5 +38,3 @@ func eq(f, s []string) bool {
 	sort.Strings(sx)
 	return reflect.DeepEqual(fx, sx)
 }
-
-
