@@ -1,4 +1,4 @@
-# AlGo [![Go Report Card](https://goreportcard.com/badge/github.com/Ch3ck/Algo)](https://goreportcard.com/report/github.com/Ch3ck/Algo) | [![Build Status](https://travis-ci.org/Ch3ck/AlGo.svg?branch=master)](https://travis-ci.org/Ch3ck/AlGo)
+# AlGo [![Go Report Card](https://goreportcard.com/badge/github.com/Ch3ck/Algo)](https://goreportcard.com/report/github.com/Ch3ck/Algo) [![Build Status](https://travis-ci.org/Ch3ck/AlGo.svg?branch=master)](https://travis-ci.org/Ch3ck/AlGo) [![GitHub issues](https://img.shields.io/github/issues/Ch3ck/AlGo.svg)](https://github.com/Ch3ck/AlGo/issues) [![GitHub stars](https://img.shields.io/github/stars/Ch3ck/AlGo.svg)](https://github.com/Ch3ck/AlGo/stargazers)
 AlGo was created by, and is maintained by [Nyah Check](https://github.com/Ch3ck), and it's the Golang implementation of the Data Structures and Algorithms as referred in CLRS. 
 
 Feel free to check out the [license](LICENSE), and make contributions by pull requests.
@@ -34,6 +34,6 @@ Star and Fork this repo; then follow the instructions in [Contributing.md](CONTR
 
 ## License
 
-MIT is licensed under [The MIT License (MIT)](LICENSE).
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/Ch3ck/AlGo/master/LICENSE)
 
 ![Gopher](doc/logo.png "Gopher")
