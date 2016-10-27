@@ -1,0 +1,13 @@
+language: go
+
+before_install:
+  - go get -u github.com/golang/lint/golint
+  - golint ./...
+# - go vet ./...
+  - diff -u <(echo-n) <(gofmt -s -d .)
+
+install:
+  - go get -u -v $((go list -f '{{join .TestImports "\n"}}' ./... && go list -f '{{join .Imports "\n"}}' ./...) | sort | uniq | grep -v AlGo)
+
+script:
+  - go test ./...

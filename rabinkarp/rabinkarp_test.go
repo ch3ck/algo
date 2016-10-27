@@ -1,4 +1,3 @@
-
 package rabinkarp
 
 import (
@@ -27,6 +26,7 @@ func TestSearch(t *testing.T) {
 		}
 	}
 }
+
 // sort string for comparison
 func eq(f, s []string) bool {
 	fx := make([]string, len(f))
@@ -38,5 +38,3 @@ func eq(f, s []string) bool {
 	sort.Strings(sx)
 	return reflect.DeepEqual(fx, sx)
 }
-
-
