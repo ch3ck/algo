@@ -21,7 +21,7 @@ func TestSearch(t *testing.T) {
 	for _, ct := range SearchTests {
 		found := Search(ct.txt, ct.patterns)
 		if !eq(found, ct.expected) {
-			t.Errorf("Broken test .....",
+			t.Error("Broken test .....",
 				ct.txt, ct.patterns, found, ct.expected)
 		}
 	}
