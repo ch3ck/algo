@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// Holds input and output for a testcase
 type testdata struct {
 	matrix [][]float64
 	l      [][]float64
@@ -22,8 +23,14 @@ var tests = []testdata{
 		[][]float64{{1.0, 0.0}, {-1.0, 1.0}},
 		[][]float64{{3.0, 6.0}, {0.0, 1.0}},
 		[]int{0, 1}},
+	{[][]float64{{1.0, 2.0, 1.0}, {3.0, 3.0, 1.0}, {0.0, 9.0, 1.0}},
+		[][]float64{{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {3.0 / 9.0, 1.0 / 9.0, 1.0}},
+		[][]float64{{3.0, 3.0, 1.0}, {0.0, 9.0, 1.0}, {0.0, 0.0, 5.0 / 9.0}},
+		[]int{1, 2, 0}},
 }
 
+// Compares two matrices for equality, considering floating point values
+// with absolute difference less than 1e-9 as equal.
 func areEqual(a, b [][]float64) bool {
 	var EPSILON float64 = 1e-9
 
@@ -46,6 +53,8 @@ func areEqual(a, b [][]float64) bool {
 	return true
 }
 
+// Tests the algorithm for LU decomposition. Note that, assuming L has only ones on
+// its main diagonal, the solution is unique.
 func TestLuDecomposition(t *testing.T) {
 	for _, test := range tests {
 		l, u, perm, err := FindLuDecomposition(test.matrix)
