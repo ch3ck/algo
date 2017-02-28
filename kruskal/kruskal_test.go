@@ -2,6 +2,7 @@ package kruskal
 
 import "testing"
 
+// Tests the kruskal's algorithm
 func TestKruskal(t *testing.T) {
 	edges := []Edge{{4, 5, 10}}
 
@@ -11,6 +12,7 @@ func TestKruskal(t *testing.T) {
 		}
 	}
 
+	// For the given test the answer has cost 13 and is unique
 	forestEdges := MinimumSpanningForest(6, edges)
 
 	if len(forestEdges) != 4 {
@@ -28,6 +30,8 @@ func TestKruskal(t *testing.T) {
 		answer = append(answer, Edge{i, i + 1, 1})
 	}
 
+	// Checking that each edge from the answer appears amongst the edges returned
+	// by the algorithm
 	for _, edge := range answer {
 		if _, ok := forestEdgesSet[edge]; !ok {
 			t.Error("Returned set of edges is not a minimum spanning forest")
