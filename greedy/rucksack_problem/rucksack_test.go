@@ -4,33 +4,32 @@
 package rucksack
 
 import (
-    "reflect"
-    "testing"
+	"reflect"
+	"testing"
 )
-
 
 /* Test pair for rucksack() algorithm */
 type testpair struct {
-    books []Pair
-    max_value float64
+	books     []Pair
+	max_value float64
 }
 
 var tests = []testpair{
-    {[]Pair{Pair{40, 16},Pair{41, 16},Pair{42, 30}},42},
-    {[]Pair{Pair{40, 16},Pair{41, 16},Pair{42, 30}},42},
+	{[]Pair{{40, 16}, {41, 16}, {42, 30}}, 42},
+	{[]Pair{{40, 15}, {41, 15}, {42, 30}}, 81},
 }
 
-/* Test case to test the Qsort function */
+/* Test case to test the rucksack function */
 func Testrucksack(t *testing.T) {
-    for _, pair := range tests {
-        value := rucksack(pair.books,30)
+	for _, pair := range tests {
+		value := rucksack(pair.books, 30)
 
-        if !reflect.DeepEqual(value, pair.max_value) {
-            t.Error(
-                "For", pair.books,
-                "expected", pair.max_value,
-                "got", value,
-            )
-        }
-    }
+		if !reflect.DeepEqual(value, pair.max_value) {
+			t.Error(
+				"For", pair.books,
+				"expected", pair.max_value,
+				"got", value,
+			)
+		}
+	}
 }
