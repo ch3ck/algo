@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Ch3ck/Algo/heapsort"
+	"github.com/Ch3ck/AlGo/heapsort"
 )
 
 func TestHeapsort(t *testing.T) {

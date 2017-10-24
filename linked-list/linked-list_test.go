@@ -1,10 +1,9 @@
 package list_test
 
 import (
+	"container/list"
 	"fmt"
 	"testing"
-	//"reflect"
-	"github.com/Ch3ck/Algo/linked-list"
 )
 
 //create three lists globally
