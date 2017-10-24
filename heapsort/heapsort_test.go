@@ -2,8 +2,9 @@ package heapsort_test
 
 import (
 	"fmt"
-	"github.com/lborg019/Algo/heapsort"
 	"testing"
+
+	"github.com/Ch3ck/Algo/heapsort"
 )
 
 func TestHeapsort(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 	//"reflect"
-	"github.com/lborg019/Algo/linked-list"
+	"github.com/Ch3ck/Algo/linked-list"
 )
 
 //create three lists globally

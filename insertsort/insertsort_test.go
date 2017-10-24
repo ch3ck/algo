@@ -21,9 +21,9 @@ var tests = []testpair{
 /* Test case to test the InsertSort function */
 func TestInsertSort(t *testing.T) {
 	for _, pair := range tests {
-		sorted := InsertSort(pair.unsorted_slice)
+		sorted := InsertSort(pair.unsortedSlice)
 
-		if !reflect.DeepEqual(sorted, pair.sorted_slice) {
+		if !reflect.DeepEqual(sorted, pair.sortedSlice) {
 			t.Error(
 				"For", pair.unsortedSlice,
 				"expected", pair.sortedSlice,
