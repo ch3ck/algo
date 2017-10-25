@@ -10,7 +10,7 @@ import (
 
 func TestMergeSort(t *testing.T) {
 	empty := []int{}
-	resultEmpty := mergeSort(empty)
+	resultEmpty := MergeSort(empty)
 
 	if !reflect.DeepEqual(empty, resultEmpty) {
 		t.Error("ERROR!", "Expected:", empty, "Result:", resultEmpty)
@@ -18,7 +18,7 @@ func TestMergeSort(t *testing.T) {
 	}
 
 	unitary := []int{1921}
-	resultUnitary := mergeSort(unitary)
+	resultUnitary := MergeSort(unitary)
 
 	if !reflect.DeepEqual(unitary, resultUnitary) {
 		t.Error("ERROR!", "Expected:", unitary, "Result:", resultUnitary)
@@ -36,7 +36,7 @@ func TestMergeSort(t *testing.T) {
 		copy(expected, array)
 		sort.Ints(expected)
 
-		result := mergeSort(array)
+		result := MergeSort(array)
 
 		if !reflect.DeepEqual(result, expected) {
 			t.Error("ERROR!", "Expected:", expected, "Result:", result)
