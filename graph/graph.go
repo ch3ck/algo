@@ -113,7 +113,7 @@ func (g graph) depthFirstTraversal(currId ID, depth int, visitedIds map[ID]inter
 
 	for _, id := range curr.edges {
 		if _, found := visitedIds[id]; !found {
-			if err := g.depthFirstTraversal(id, depth + 1, visitedIds, visitor); err != nil {
+			if err := g.depthFirstTraversal(id, depth+1, visitedIds, visitor); err != nil {
 				return err
 			}
 		}
