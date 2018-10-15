@@ -23,7 +23,9 @@
 
 package adjaceny_list_graph
 
-import "container/list"
+import (
+	"container/list"
+)
 
 // A vertex (or node) in the graph.
 // Each vertex has the following attributes:
@@ -41,54 +43,132 @@ type vertex struct {
 	incomingEdges list.List
 }
 
+// An edge in the directed graph.
+// Each edge is represented as a 2-tuple struct that has the following attributes
+//
+// weight (interface): a value denoted the weight of an edge (when dealing with weighted graphs).
+//						It is set to nil for unweighted graphs.
+// fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
+// toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 type edge struct {
+	weight interface{}
 	fromVertex vertex
 	toVertex   vertex
 }
 
+// The Directed Adjacency List Graph.
+//
+// ATTRIBUTES
+//
+// primaryStructure (map[int]vertex): holds the vertices in the graph. A map is used
+//                                    because it provides O(1) access to a node.
+// numVertices (int): The total number of vertices in the graph. This is always 1 greater
+//                    than the number of edges
+// numEdges (int): The total number of edges in the graph. This is always 1 less than the
+//                 number of vertices
 type DirectedAdjacencyListGraph struct {
 	primaryStructure map[int]vertex
+	numVertices      int
+	numEdges         int
 }
 
+// NumVertices returns the total number of vertices currently in the graph.
 func (dalg *DirectedAdjacencyListGraph) NumVertices() int {
-	return 0
+	return dalg.numVertices
 }
 
+// NumEdges returns the total number of edges currently in the graph.
 func (dalg *DirectedAdjacencyListGraph) NumEdges() int {
-	return 0
+	return dalg.numEdges
 }
 
-func (dalg *DirectedAdjacencyListGraph) Edges() int {
-	return 0
+// Edges returns a list of all the edges in the graph
+func (dalg *DirectedAdjacencyListGraph) Edges() list.List {
+	return list.List{}
 }
 
+// Edges returns a list of all the edges in the graph
+func (dalg *DirectedAdjacencyListGraph) Vertices() list.List {
+	return list.List{}
+}
+
+// GetEdge returns the `edge` that start from `fromVertex` and ends at `toVertex`
+// if one exists; otherwise return null.
+//
+// ARGUMENTS
+//
+// fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
+// toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertex, toVertex vertex) edge {
 	return edge{
+		-1,
 		vertex{},
 		vertex{},
 	}
 }
 
-func (dalg *DirectedAdjacencyListGraph) OutDegree() int {
-	return 0
+// OutDegree returns the number of outgoing edges from vertex with the specified ID.
+//
+// ARGUMENTS
+//
+// id (int): ID of the vertex of interest
+func (dalg *DirectedAdjacencyListGraph) OutDegree(id int) int {
+	return dalg.primaryStructure[id].outgoingEdges.Len()
 }
 
-func (dalg *DirectedAdjacencyListGraph) InDegree() int {
-	return 0
+// InDegree returns the number of outgoing edges from vertex with the specified ID.
+//
+// ARGUMENTS
+//
+// id (int): ID of the vertex of interest
+func (dalg *DirectedAdjacencyListGraph) InDegree(id int) int {
+	return dalg.primaryStructure[id].incomingEdges.Len()
 }
 
-func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(v vertex) list.List {
-	return v.outgoingEdges
+// OutgoingEdges Returns a list of all outgoing edges from vertex with the specified ID.
+//
+// ARGUMENTS
+//
+// id (int): ID of the vertex of interest
+func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) list.List {
+	return dalg.primaryStructure[id].outgoingEdges
 }
 
-func (dalg *DirectedAdjacencyListGraph) IncomingEdges(v vertex) list.List {
-	return v.outgoingEdges
+// IncomingEdges Returns a list of all outgoing edges from vertex with the specified ID.
+//
+// ARGUMENTS
+//
+// id (int): ID of the vertex of interest
+func (dalg *DirectedAdjacencyListGraph) IncomingEdges(id int) list.List {
+	return dalg.primaryStructure[id].outgoingEdges
 }
 
+// InsertVertex Creates and returns a new Vertex storing element `item`.
+//
+// ARGUMENTS
+// item (interface): the item the vertex will hold.
 func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) {}
 
+// InsertEdge Creates and returns a new Edge from vertex `fromVertex` to vertex `toVertex`,
+// storing element x; an error occurs if there already exists an edge from `fromVertex` to `toVertex`
+//
+// ARGUMENTS
+//
+// fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
+// toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
+// item (interface): the item the edge will hold (in the case of a weighted graph).
 func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertex, toVertex vertex, item interface{}) {}
 
-func (dalg *DirectedAdjacencyListGraph) RemoveVertex(v vertex) {}
+// RemoveVertex Removes vertex with the specified ID and all its incident edges from the graph.
+//
+// ARGUMENTS
+//
+// id (int): ID of the vertex of interest
+func (dalg *DirectedAdjacencyListGraph) RemoveVertex(int int) {}
 
-func (dalg *DirectedAdjacencyListGraph) RemoveEdge() {}
+// RemoveEdge removes edge e from the graph
+//
+// ARGUMENTS
+//
+// e (edge): the edge to be removed
+func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e edge) {}
