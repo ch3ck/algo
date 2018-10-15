@@ -112,11 +112,17 @@ func (dalg *DirectedAdjacencyListGraph) Vertices() []*vertex {
 // fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertexID, toVertexID int) *edge {
-	return &edge{
-		-1,
-		&vertex{},
-		&vertex{},
+	fromVertex := dalg.primaryStructure[fromVertexID]
+	toVertex := dalg.primaryStructure[toVertexID]
+	if fromVertex != nil && toVertex != nil {
+		for _, e := range fromVertex.outgoingEdges {
+			if e.toVertex == toVertex {
+				return e
+			}
+		}
 	}
+
+	return nil
 }
 
 // OutDegree returns the number of outgoing edges from vertex with the specified ID.
@@ -164,8 +170,8 @@ func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) *vertex {
 		v := &vertex{
 			dalg.numVertices,
 			item,
-			make([]*edge, 5),
-			make([]*edge, 5),
+			make([]*edge, 0),
+			make([]*edge, 0),
 		}
 		dalg.primaryStructure[dalg.numVertices] = v
 		dalg.numVertices++
@@ -185,24 +191,26 @@ func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) *vertex {
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 // item (interface): the item the edge will hold (in the case of a weighted graph).
 func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int, item interface{}) interface{} {
-	//if dalg.GetEdge(fromVertexID, toVertexID) != nil {
-	//	return errors.New("edge already exist")
-	//}
+	if dalg.GetEdge(fromVertexID, toVertexID) == nil {
+		fromVertex := dalg.primaryStructure[fromVertexID]
+		toVertex := dalg.primaryStructure[toVertexID]
+		if fromVertex != nil && toVertex != nil {
+			e := &edge{
+				item,
+				fromVertex,
+				toVertex,
+			}
 
-	fromVertex := dalg.primaryStructure[fromVertexID]
-	toVertex := dalg.primaryStructure[toVertexID]
-	e := &edge{
-		item,
-		fromVertex,
-		toVertex,
+			fromVertex.outgoingEdges = append(fromVertex.outgoingEdges, e)
+			toVertex.incomingEdges = append(toVertex.incomingEdges, e)
+
+			dalg.numEdges++
+
+			return e
+		}
 	}
 
-	fromVertex.outgoingEdges = append(fromVertex.outgoingEdges, e)
-	toVertex.incomingEdges = append(toVertex.incomingEdges, e)
-
-	dalg.numEdges++
-
-	return e
+	return nil
 }
 
 // RemoveVertex Removes vertex with the specified ID and all its incident edges from the graph.
