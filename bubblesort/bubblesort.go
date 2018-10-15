@@ -12,17 +12,17 @@ func Swap(lhs *int, rhs *int) {
 // O(N^2)
 func bubbleSort(A []int) []int {
 	N := len(A)
-	result := make([]int, len(A));
+	result := make([]int, len(A))
 	i := 0
 	j := 0
 	for i = 0; i < N; i++ {
-		result[i] = A[i];
+		result[i] = A[i]
 	}
 
-	for i = 0; i < N - 1; i++ {
-		for j = i; j < N - 1; j++ {
-			if (result[j] > result[j + 1]) {
-				Swap(&result[j], &result[j + 1])
+	for i = 0; i < N-1; i++ {
+		for j = i; j < N-1; j++ {
+			if result[j] > result[j+1] {
+				Swap(&result[j], &result[j+1])
 			}
 		}
 	}
