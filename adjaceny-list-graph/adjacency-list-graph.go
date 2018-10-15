@@ -1,5 +1,5 @@
-// Copyright 2018 alGO. All rights reserved.
-// Use of this source code is governed by the `MIT License`.
+// Copyright 2018 Anthony A. Abeo. All rights reserved.
+// Use of this source code is governed by a `MIT License`.
 // license that can be found in the LICENSE file.
 
 // SUMMARY
@@ -23,10 +23,6 @@
 
 package adjaceny_list_graph
 
-import (
-	"container/list"
-)
-
 // A vertex (or node) in the graph.
 // Each vertex has the following attributes:
 //
@@ -39,8 +35,8 @@ import (
 type vertex struct {
 	id            int
 	item          interface{}
-	outgoingEdges list.List
-	incomingEdges list.List
+	outgoingEdges []*edge
+	incomingEdges []*edge
 }
 
 // An edge in the directed graph.
@@ -51,7 +47,7 @@ type vertex struct {
 // fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 type edge struct {
-	weight interface{}
+	weight     interface{}
 	fromVertex vertex
 	toVertex   vertex
 }
@@ -62,14 +58,20 @@ type edge struct {
 //
 // primaryStructure (map[int]vertex): holds the vertices in the graph. A map is used
 //                                    because it provides O(1) access to a node.
-// numVertices (int): The total number of vertices in the graph. This is always 1 greater
-//                    than the number of edges
-// numEdges (int): The total number of edges in the graph. This is always 1 less than the
-//                 number of vertices
+// numVertices (int): The total number of vertices in the graph.
+// numEdges (int): The total number of edges in the graph.
 type DirectedAdjacencyListGraph struct {
-	primaryStructure map[int]vertex
+	primaryStructure map[int]*vertex
 	numVertices      int
 	numEdges         int
+}
+
+func NewDALGraph() *DirectedAdjacencyListGraph {
+	return &DirectedAdjacencyListGraph{
+		make(map[int]*vertex),
+		0,
+		0,
+	}
 }
 
 // NumVertices returns the total number of vertices currently in the graph.
@@ -82,14 +84,24 @@ func (dalg *DirectedAdjacencyListGraph) NumEdges() int {
 	return dalg.numEdges
 }
 
-// Edges returns a list of all the edges in the graph
-func (dalg *DirectedAdjacencyListGraph) Edges() list.List {
-	return list.List{}
+// Edges returns a list of all the edges in the graph.
+func (dalg *DirectedAdjacencyListGraph) Edges() []*edge {
+	var edges = make([]*edge, dalg.numEdges)
+	for _, v := range dalg.primaryStructure {
+		edges = append(edges, v.outgoingEdges...)
+	}
+
+	return edges
 }
 
 // Edges returns a list of all the edges in the graph
-func (dalg *DirectedAdjacencyListGraph) Vertices() list.List {
-	return list.List{}
+func (dalg *DirectedAdjacencyListGraph) Vertices() []*vertex {
+	var vertices = make([]*vertex, dalg.numVertices)
+	for _, v := range dalg.primaryStructure {
+		vertices = append(vertices, v)
+	}
+
+	return vertices
 }
 
 // GetEdge returns the `edge` that start from `fromVertex` and ends at `toVertex`
@@ -99,8 +111,8 @@ func (dalg *DirectedAdjacencyListGraph) Vertices() list.List {
 //
 // fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
-func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertex, toVertex vertex) edge {
-	return edge{
+func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertexID, toVertexID int) *edge {
+	return &edge{
 		-1,
 		vertex{},
 		vertex{},
@@ -113,7 +125,7 @@ func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertex, toVertex vertex) edg
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) OutDegree(id int) int {
-	return dalg.primaryStructure[id].outgoingEdges.Len()
+	return len(dalg.primaryStructure[id].outgoingEdges)
 }
 
 // InDegree returns the number of outgoing edges from vertex with the specified ID.
@@ -122,7 +134,7 @@ func (dalg *DirectedAdjacencyListGraph) OutDegree(id int) int {
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) InDegree(id int) int {
-	return dalg.primaryStructure[id].incomingEdges.Len()
+	return len(dalg.primaryStructure[id].incomingEdges)
 }
 
 // OutgoingEdges Returns a list of all outgoing edges from vertex with the specified ID.
@@ -130,7 +142,7 @@ func (dalg *DirectedAdjacencyListGraph) InDegree(id int) int {
 // ARGUMENTS
 //
 // id (int): ID of the vertex of interest
-func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) list.List {
+func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) []*edge {
 	return dalg.primaryStructure[id].outgoingEdges
 }
 
@@ -139,7 +151,7 @@ func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) list.List {
 // ARGUMENTS
 //
 // id (int): ID of the vertex of interest
-func (dalg *DirectedAdjacencyListGraph) IncomingEdges(id int) list.List {
+func (dalg *DirectedAdjacencyListGraph) IncomingEdges(id int) []*edge {
 	return dalg.primaryStructure[id].outgoingEdges
 }
 
