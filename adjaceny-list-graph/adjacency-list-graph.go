@@ -48,8 +48,8 @@ type vertex struct {
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 type edge struct {
 	weight     interface{}
-	fromVertex vertex
-	toVertex   vertex
+	fromVertex *vertex
+	toVertex   *vertex
 }
 
 // The Directed Adjacency List Graph.
@@ -114,8 +114,8 @@ func (dalg *DirectedAdjacencyListGraph) Vertices() []*vertex {
 func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertexID, toVertexID int) *edge {
 	return &edge{
 		-1,
-		vertex{},
-		vertex{},
+		&vertex{},
+		&vertex{},
 	}
 }
 
@@ -159,7 +159,22 @@ func (dalg *DirectedAdjacencyListGraph) IncomingEdges(id int) []*edge {
 //
 // ARGUMENTS
 // item (interface): the item the vertex will hold.
-func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) {}
+func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) *vertex {
+	if item != nil {
+		v := &vertex{
+			dalg.numVertices,
+			item,
+			make([]*edge, 5),
+			make([]*edge, 5),
+		}
+		dalg.primaryStructure[dalg.numVertices] = v
+		dalg.numVertices++
+
+		return v
+	}
+
+	return nil
+}
 
 // InsertEdge Creates and returns a new Edge from vertex `fromVertex` to vertex `toVertex`,
 // storing element x; an error occurs if there already exists an edge from `fromVertex` to `toVertex`
@@ -169,7 +184,26 @@ func (dalg *DirectedAdjacencyListGraph) InsertVertex(item interface{}) {}
 // fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 // item (interface): the item the edge will hold (in the case of a weighted graph).
-func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertex, toVertex vertex, item interface{}) {}
+func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int, item interface{}) interface{} {
+	//if dalg.GetEdge(fromVertexID, toVertexID) != nil {
+	//	return errors.New("edge already exist")
+	//}
+
+	fromVertex := dalg.primaryStructure[fromVertexID]
+	toVertex := dalg.primaryStructure[toVertexID]
+	e := &edge{
+		item,
+		fromVertex,
+		toVertex,
+	}
+
+	fromVertex.outgoingEdges = append(fromVertex.outgoingEdges, e)
+	toVertex.incomingEdges = append(toVertex.incomingEdges, e)
+
+	dalg.numEdges++
+
+	return e
+}
 
 // RemoveVertex Removes vertex with the specified ID and all its incident edges from the graph.
 //
