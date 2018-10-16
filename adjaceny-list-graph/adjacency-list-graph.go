@@ -47,6 +47,7 @@ type vertex struct {
 // fromVertex (vertex): the vertex this edge starts from. The outgoing vertex.
 // toVertex (vertex): the vertex this edge is incident on. The incoming vertex.
 type edge struct {
+	id         int
 	weight     interface{}
 	fromVertex *vertex
 	toVertex   *vertex
@@ -54,6 +55,7 @@ type edge struct {
 
 func NewEdge() *edge {
 	return &edge{
+		0,
 		"sugar",
 		new(vertex),
 		new(vertex),
@@ -204,6 +206,7 @@ func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int,
 		toVertex := dalg.primaryStructure[toVertexID]
 		if fromVertex != nil && toVertex != nil {
 			e := &edge{
+				dalg.numEdges,
 				item,
 				fromVertex,
 				toVertex,
@@ -227,38 +230,52 @@ func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int,
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) RemoveVertex(int int) {
-
+	
 }
 
-// RemoveEdge removes edge e from the graph
+// RemoveEdge removes edge e from the graph.
 //
 // ARGUMENTS
 //
 // e (edge): the edge to be removed
 func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e *edge) bool {
-	foundEdge := false
-	if e != nil {
-		for i, edg := range e.fromVertex.outgoingEdges {
-			if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
-				e.fromVertex.outgoingEdges = append(e.fromVertex.outgoingEdges[:i], e.fromVertex.outgoingEdges[i+1:]...)
-				foundEdge = true
-				break
-			}
-		}
+	if e != nil && e.id >= 0 && e.id < len(e.fromVertex.outgoingEdges) {
 
-		if foundEdge {
-			for j, edg := range e.toVertex.incomingEdges {
-				if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
-					e.toVertex.incomingEdges = append(e.toVertex.incomingEdges[:j], e.toVertex.incomingEdges[j+1:]...)
-					break
-				}
-			}
-			dalg.numEdges--
+		e.fromVertex.outgoingEdges[e.id] = e.fromVertex.outgoingEdges[len(e.fromVertex.outgoingEdges)-1]
+		e.fromVertex.outgoingEdges = e.fromVertex.outgoingEdges[:len(e.fromVertex.outgoingEdges)-1]
 
-			return true
-		}
+		e.toVertex.incomingEdges[e.id] = e.toVertex.incomingEdges[len(e.toVertex.incomingEdges)-1]
+		e.toVertex.incomingEdges = e.toVertex.incomingEdges[:len(e.toVertex.incomingEdges)-1]
 
+		dalg.numEdges--
+
+		return true
 	}
 
 	return false
+	//foundEdge := false
+	//if e != nil {
+	//	for i, edg := range e.fromVertex.outgoingEdges {
+	//		if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
+	//			e.fromVertex.outgoingEdges = append(e.fromVertex.outgoingEdges[:i], e.fromVertex.outgoingEdges[i+1:]...)
+	//			foundEdge = true
+	//			break
+	//		}
+	//	}
+	//
+	//	if foundEdge {
+	//		for j, edg := range e.toVertex.incomingEdges {
+	//			if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
+	//				e.toVertex.incomingEdges = append(e.toVertex.incomingEdges[:j], e.toVertex.incomingEdges[j+1:]...)
+	//				break
+	//			}
+	//		}
+	//		dalg.numEdges--
+	//
+	//		return true
+	//	}
+	//
+	//}
+	//
+	//return false
 }

@@ -51,7 +51,7 @@ func TestDirectedAdjacencyListGraph_InsertEdge(t *testing.T) {
 	}
 
 	if dalg.primaryStructure[0].outgoingEdges[0].weight != "brother" ||
-		dalg.primaryStructure[1].incomingEdges[0].weight != "brother"{
+		dalg.primaryStructure[1].incomingEdges[0].weight != "brother" {
 
 		t.Error("edge between vertex 0 and 1 broken")
 	}
