@@ -141,7 +141,11 @@ func (dalg *DirectedAdjacencyListGraph) GetEdge(fromVertexID, toVertexID int) *e
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) OutDegree(id int) int {
-	return len(dalg.primaryStructure[id].outgoingEdges)
+	if dalg.primaryStructure[id] != nil {
+		return len(dalg.primaryStructure[id].outgoingEdges)
+	}
+
+	return -1
 }
 
 // InDegree returns the number of outgoing edges from vertex with the specified ID.
@@ -150,7 +154,11 @@ func (dalg *DirectedAdjacencyListGraph) OutDegree(id int) int {
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) InDegree(id int) int {
-	return len(dalg.primaryStructure[id].incomingEdges)
+	if dalg.primaryStructure[id] != nil {
+		return len(dalg.primaryStructure[id].incomingEdges)
+	}
+
+	return -1
 }
 
 // OutgoingEdges Returns a list of all outgoing edges from vertex with the specified ID.
@@ -159,7 +167,11 @@ func (dalg *DirectedAdjacencyListGraph) InDegree(id int) int {
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) []*edge {
-	return dalg.primaryStructure[id].outgoingEdges
+	if dalg.primaryStructure[id] != nil {
+		return dalg.primaryStructure[id].outgoingEdges
+	}
+
+	return nil
 }
 
 // IncomingEdges Returns a list of all outgoing edges from vertex with the specified ID.
@@ -168,7 +180,11 @@ func (dalg *DirectedAdjacencyListGraph) OutgoingEdges(id int) []*edge {
 //
 // id (int): ID of the vertex of interest
 func (dalg *DirectedAdjacencyListGraph) IncomingEdges(id int) []*edge {
-	return dalg.primaryStructure[id].outgoingEdges
+	if dalg.primaryStructure[id] != nil {
+		return dalg.primaryStructure[id].outgoingEdges
+	}
+
+	return nil
 }
 
 // InsertVertex Creates and returns a new Vertex storing element `item`.
@@ -260,29 +276,4 @@ func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e *edge) bool {
 	}
 
 	return false
-	//foundEdge := false
-	//if e != nil {
-	//	for i, edg := range e.fromVertex.outgoingEdges {
-	//		if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
-	//			e.fromVertex.outgoingEdges = append(e.fromVertex.outgoingEdges[:i], e.fromVertex.outgoingEdges[i+1:]...)
-	//			foundEdge = true
-	//			break
-	//		}
-	//	}
-	//
-	//	if foundEdge {
-	//		for j, edg := range e.toVertex.incomingEdges {
-	//			if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
-	//				e.toVertex.incomingEdges = append(e.toVertex.incomingEdges[:j], e.toVertex.incomingEdges[j+1:]...)
-	//				break
-	//			}
-	//		}
-	//		dalg.numEdges--
-	//
-	//		return true
-	//	}
-	//
-	//}
-	//
-	//return false
 }
