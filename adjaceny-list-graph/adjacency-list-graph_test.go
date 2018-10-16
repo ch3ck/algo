@@ -82,3 +82,34 @@ func TestDirectedAdjacencyListGraph_GetEdge(t *testing.T) {
 		t.Error("Incorrect. Edge DOES NOT actually exist. e should be nil")
 	}
 }
+
+func TestDirectedAdjacencyListGraph_RemoveEdge(t *testing.T) {
+	e := dalg.GetEdge(0, 1)
+	if e == nil {
+		t.Error("Incorrect. Edge actually exist")
+	}
+
+	dalg.RemoveEdge(e)
+
+	e = dalg.GetEdge(0, 1)
+	if e != nil {
+		t.Error("Incorrect. Edge does not exist. Should be nil")
+	}
+
+	if dalg.numEdges != 0 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", dalg.numEdges, 0)
+	}
+
+	e = dalg.GetEdge(1, 4)
+	if e != nil {
+		t.Error("Incorrect. Edge DOES NOT actually exist. e should be nil")
+	}
+
+	if dalg.RemoveEdge(e) {
+		t.Error("Incorrect. Edge DOES NOT actually exist.")
+	}
+
+	if dalg.RemoveEdge(NewEdge()) {
+		t.Error("Incorrect. Edge DOES NOT actually exist.")
+	}
+}

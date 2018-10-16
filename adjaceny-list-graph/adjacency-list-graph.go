@@ -26,12 +26,12 @@ package adjaceny_list_graph
 // A vertex (or node) in the graph.
 // Each vertex has the following attributes:
 //
-// 		id (int): a number to help access the node in O(1) time
-//		item (interface): the item stored in the vertex
-//		outgoingEdges (list.List): a list of the vertices, that along
-// 								   with the current vertex form an outgoing edge.
-//		incomingEdges (list.List): a list of the vertices, that along
-//								   with the current vertex form an outgoing edge.
+// id (int): a number to help access the node in O(1) time
+//	item (interface): the item stored in the vertex
+//	outgoingEdges (list.List): a list of the vertices, that along
+// 							   with the current vertex form an outgoing edge.
+//	incomingEdges (list.List): a list of the vertices, that along
+//							   with the current vertex form an outgoing edge.
 type vertex struct {
 	id            int
 	item          interface{}
@@ -50,6 +50,14 @@ type edge struct {
 	weight     interface{}
 	fromVertex *vertex
 	toVertex   *vertex
+}
+
+func NewEdge() *edge {
+	return &edge{
+		"sugar",
+		new(vertex),
+		new(vertex),
+	}
 }
 
 // The Directed Adjacency List Graph.
@@ -218,11 +226,39 @@ func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int,
 // ARGUMENTS
 //
 // id (int): ID of the vertex of interest
-func (dalg *DirectedAdjacencyListGraph) RemoveVertex(int int) {}
+func (dalg *DirectedAdjacencyListGraph) RemoveVertex(int int) {
+
+}
 
 // RemoveEdge removes edge e from the graph
 //
 // ARGUMENTS
 //
 // e (edge): the edge to be removed
-func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e edge) {}
+func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e *edge) bool {
+	foundEdge := false
+	if e != nil {
+		for i, edg := range e.fromVertex.outgoingEdges {
+			if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
+				e.fromVertex.outgoingEdges = append(e.fromVertex.outgoingEdges[:i], e.fromVertex.outgoingEdges[i+1:]...)
+				foundEdge = true
+				break
+			}
+		}
+
+		if foundEdge {
+			for j, edg := range e.toVertex.incomingEdges {
+				if edg.weight == e.weight && edg.fromVertex.id == e.fromVertex.id {
+					e.toVertex.incomingEdges = append(e.toVertex.incomingEdges[:j], e.toVertex.incomingEdges[j+1:]...)
+					break
+				}
+			}
+			dalg.numEdges--
+
+			return true
+		}
+
+	}
+
+	return false
+}
