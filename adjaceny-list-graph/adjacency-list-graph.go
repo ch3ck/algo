@@ -229,8 +229,15 @@ func (dalg *DirectedAdjacencyListGraph) InsertEdge(fromVertexID, toVertexID int,
 // ARGUMENTS
 //
 // id (int): ID of the vertex of interest
-func (dalg *DirectedAdjacencyListGraph) RemoveVertex(int int) {
-	
+func (dalg *DirectedAdjacencyListGraph) RemoveVertex(id int) bool {
+	if dalg.primaryStructure[id] != nil {
+		delete(dalg.primaryStructure, id)
+		dalg.numVertices--
+
+		return true
+	}
+
+	return false
 }
 
 // RemoveEdge removes edge e from the graph.

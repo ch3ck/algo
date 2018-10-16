@@ -113,3 +113,14 @@ func TestDirectedAdjacencyListGraph_RemoveEdge(t *testing.T) {
 		t.Error("Incorrect. Edge DOES NOT actually exist.")
 	}
 }
+
+func TestDirectedAdjacencyListGraph_RemoveVertex(t *testing.T) {
+	dalg.RemoveVertex(0)
+	if dalg.numVertices != 1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", dalg.numVertices, 1)
+	}
+
+	if dalg.RemoveVertex(0) {
+		t.Error("Incorrect. Vertex DOES NOT actually exist.")
+	}
+}
