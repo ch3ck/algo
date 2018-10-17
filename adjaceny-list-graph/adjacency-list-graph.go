@@ -23,6 +23,10 @@
 
 package adjaceny_list_graph
 
+import (
+	"github.com/Ch3ck/AlGo/queuestack"
+)
+
 // A vertex (or node) in the graph.
 // Each vertex has the following attributes:
 //
@@ -276,4 +280,44 @@ func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e *edge) bool {
 	}
 
 	return false
+}
+
+func (dalg *DirectedAdjacencyListGraph) BFS() []int {
+	var l []int
+	visitedTable := make(map[int]bool, dalg.numVertices)
+	for key := range dalg.primaryStructure {
+		visitedTable[key] = false
+	}
+
+	for key, vertex := range dalg.primaryStructure {
+		if !visitedTable[key] {
+			l = bfs(vertex, visitedTable)
+		}
+	}
+
+	return l
+}
+
+func bfs(v *vertex, visitedTable map[int]bool) []int {
+	l := make([]int, 0)
+	queue := queuestack.NewQueue()
+	queue.Enqueue(v)
+	visitedTable[v.id] = true
+
+	l = append(l, v.id)
+
+	for !queue.Empty() {
+		if node, err := queue.Dequeue(); err == nil {
+			for _, ed := range node.(*vertex).outgoingEdges {
+				if !visitedTable[ed.toVertex.id] {
+					visitedTable[ed.toVertex.id] = true
+					queue.Enqueue(ed.toVertex)
+
+					l = append(l, ed.toVertex.id)
+				}
+			}
+		}
+	}
+
+	return l
 }

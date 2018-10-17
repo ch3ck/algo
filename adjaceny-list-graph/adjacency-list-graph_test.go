@@ -174,4 +174,7 @@ func TestIntegration(t *testing.T)  {
 	if g.InDegree(v3.id) != 1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v3.id), 1)}
 	if g.InDegree(v2.id) != 1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v2.id), 1)}
 	if g.InDegree(9) != -1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(9), -1)}
+
+	// Testing Breadth-First Search
+	t.Log(g.BFS())
 }
