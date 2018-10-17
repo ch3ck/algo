@@ -282,6 +282,10 @@ func (dalg *DirectedAdjacencyListGraph) RemoveEdge(e *edge) bool {
 	return false
 }
 
+// Performs a Generic Breadth-First Search on the graph. All is does is
+// return a list of the IDs of the nodes in the order they were visited.
+//
+// Example: [4, 2, 0, 3, 1]
 func (dalg *DirectedAdjacencyListGraph) BFS() []int {
 	var l []int
 	visitedTable := make(map[int]bool, dalg.numVertices)
