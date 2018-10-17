@@ -125,7 +125,7 @@ func TestDirectedAdjacencyListGraph_RemoveVertex(t *testing.T) {
 	}
 }
 
-func TestIntegration(t *testing.T)  {
+func TestIntegration(t *testing.T) {
 	// Create a new graph
 	g := NewDALGraph()
 
@@ -145,35 +145,67 @@ func TestIntegration(t *testing.T)  {
 	g.InsertEdge(v5.id, v3.id, "53")
 
 	e912 := g.InsertEdge(9, 12, "912")
-	if e912 != nil {t.Errorf("Incorrect, cannot insert such edge")}
+	if e912 != nil {
+		t.Errorf("Incorrect, cannot insert such edge")
+	}
 
 	// Checking for the number of edges and vertices
-	if g.NumVertices() != 5 {t.Errorf("Incorrect, got: %d, expected: %v.", g.NumVertices(), 5)}
-	if g.NumEdges() != 6 {t.Errorf("Incorrect, got: %d, expected: %v.", g.NumEdges(), 6)}
+	if g.NumVertices() != 5 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.NumVertices(), 5)
+	}
+	if g.NumEdges() != 6 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.NumEdges(), 6)
+	}
 
 	// Testing GetEdge()
 	e := g.GetEdge(v1.id, v2.id)
-	if e.id != e12.(*edge).id {t.Errorf("Incorrect, got: %d, expected: %v.", e.id, e12.(*edge).id)}
-	if e.weight != e12.(*edge).weight {t.Errorf("Incorrect, got: %d, expected: %v.", e.weight, e12.(*edge).weight)}
+	if e.id != e12.(*edge).id {
+		t.Errorf("Incorrect, got: %d, expected: %v.", e.id, e12.(*edge).id)
+	}
+	if e.weight != e12.(*edge).weight {
+		t.Errorf("Incorrect, got: %d, expected: %v.", e.weight, e12.(*edge).weight)
+	}
 
 	e = g.GetEdge(v3.id, v4.id)
-	if e.id != e34.(*edge).id {t.Errorf("Incorrect, got: %d, expected: %v.", e.id, e34.(*edge).id)}
-	if e.weight != e34.(*edge).weight {t.Errorf("Incorrect, got: %d, expected: %v.", e.weight, e34.(*edge).weight)}
+	if e.id != e34.(*edge).id {
+		t.Errorf("Incorrect, got: %d, expected: %v.", e.id, e34.(*edge).id)
+	}
+	if e.weight != e34.(*edge).weight {
+		t.Errorf("Incorrect, got: %d, expected: %v.", e.weight, e34.(*edge).weight)
+	}
 
 	e = g.GetEdge(5, 3)
-	if e != nil {t.Error("Incorrect. That edge is invalid")}
+	if e != nil {
+		t.Error("Incorrect. That edge is invalid")
+	}
 
 	// Testing OutDegree
-	if g.OutDegree(v1.id) != 2 {t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v1.id), 2)}
-	if g.OutDegree(v3.id) != 2 {t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v3.id), 2)}
-	if g.OutDegree(v5.id) != 1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v5.id), 1)}
-	if g.OutDegree(9) != -1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(9), -1)}
+	if g.OutDegree(v1.id) != 2 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v1.id), 2)
+	}
+	if g.OutDegree(v3.id) != 2 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v3.id), 2)
+	}
+	if g.OutDegree(v5.id) != 1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(v5.id), 1)
+	}
+	if g.OutDegree(9) != -1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.OutDegree(9), -1)
+	}
 
 	// Testing InDegree
-	if g.InDegree(v4.id) != 2 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v4.id), 2)}
-	if g.InDegree(v3.id) != 1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v3.id), 1)}
-	if g.InDegree(v2.id) != 1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v2.id), 1)}
-	if g.InDegree(9) != -1 {t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(9), -1)}
+	if g.InDegree(v4.id) != 2 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v4.id), 2)
+	}
+	if g.InDegree(v3.id) != 1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v3.id), 1)
+	}
+	if g.InDegree(v2.id) != 1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(v2.id), 1)
+	}
+	if g.InDegree(9) != -1 {
+		t.Errorf("Incorrect, got: %d, expected: %v.", g.InDegree(9), -1)
+	}
 
 	// Testing Breadth-First Search
 	t.Log(g.BFS())
