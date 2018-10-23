@@ -1,7 +1,3 @@
-// Copyright 2018 Anthony A. Abeo. All rights reserved.
-// Use of this source code is governed by a `MIT License`.
-// license that can be found in the LICENSE file.
-
 // SUMMARY
 //
 // This module implements a graph data structure using the adjacency
