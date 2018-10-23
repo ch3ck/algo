@@ -2,14 +2,6 @@ package graph
 
 import "fmt"
 
-/*import "os"
-import "strconv"
-import "fmt"*/
-
-//Heapsort for integers in Golang
-//based on Professor Mark Allen Weiss' solution in C
-//http://users.cs.fiu.edu/~weiss/
-
 // Node
 type ID string
 
