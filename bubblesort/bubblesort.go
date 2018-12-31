@@ -18,11 +18,11 @@ func bubbleSort(A []int) []int {
 	for i = 0; i < N; i++ {
 		result[i] = A[i]
 	}
-
-	for i = 0; i < N - 1; i++ {
-		for j = 0; j < N - 1; j++ {
-			if result[j] > result[j + 1] {
-				Swap(&result[j], &result[j + 1])
+  
+	for i = 0; i < N-1; i++ {
+		for j = 0; j < N-1; j++ {
+			if result[j] > result[j+1] {
+				Swap(&result[j], &result[j+1])
 			}
 		}
 	}
